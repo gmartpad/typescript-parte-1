@@ -2,10 +2,13 @@ class NegociacoesView {
     constructor(seletor) {
         this._elemento = document.querySelector(seletor);
     }
-    update() {
-        this._elemento.innerHTML = this.template();
+    update(model) {
+        this._elemento.innerHTML = this.template(model);
     }
-    template() {
+    console() {
+        console.log("jooj");
+    }
+    template(model) {
         return `
         <table class="table table-hover table-bordered">
             <thead>
@@ -19,7 +22,14 @@ class NegociacoesView {
             
             <tbody>
             </tbody>
-            
+                ${model.paraArray().map(negociacao => `
+                        <tr>
+                            <td>${negociacao.data.getDate()}/${negociacao.data.getMonth() + 1}/${negociacao.data.getFullYear()}</td>
+                            <td>${negociacao.quantidade}</td>
+                            <td>${negociacao.valor}</td>
+                            <td>${negociacao.volume}</td>
+                        </tr>
+                    `).join('')}
             <tfoot>
             </tfoot>
         </table>
